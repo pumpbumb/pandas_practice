@@ -1,12 +1,11 @@
 import numpy as np
 import pandas as pd
 
-ser = pd.Series([1, 2, 3])
-
-idx = pd.Index([4, 5, 6])
-print(type(idx))
-
-ser = np.maximum(ser, idx)
-print(type(ser), ser, sep='\n')
-
-print(pd.DataFrame(np.random.randn(3, 12)))
+arrays = [
+    ["bar", "bar", "baz", "baz", "foo", "foo", "qux", "qux"],
+    ["one", "two", "one", "two", "one", "two", "one", "two"],
+]
+tuples = list(zip(*arrays))
+index = pd.MultiIndex.from_tuples(tuples, names=["first", "second"])
+s = pd.Series(np.random.randint(-10, 10, size=8), index=index)
+print(s)
